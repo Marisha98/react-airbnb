@@ -1,13 +1,27 @@
+import Page from "./component/page";
+import Header from "./component/header";
+import Title from "./component/title";
+import Photo from "./component/photo";
+import Price from "./component/price";
+import RoomList from "./component/room-list";
+import Description from "./component/description";
+import PropertyDetails from "./component/property-details";
+import Amenities from "./component/amenities";
+import Contact from "./component/contact";
+import AdditionalProperties from "./component/additional-properties";
+import AttractionNearby from "./component/attractions-nearby";
+import ReviewsList from "./component/guest-reviews";
+
 function App() {
   const data = {
-    listing_name: "Іст-Сайд Біл",
+    listing_name: "East Side Bill",
     reviews_summary: {
       average_rating: 4.9,
       total_reviews: 190,
     },
     location: {
-      city: "Остін, Техас",
-      country: "Сполучені Штати",
+      city: "Austin, Texas",
+      country: "United States",
     },
     superhost: true,
 
@@ -50,7 +64,7 @@ function App() {
     ],
 
     description:
-      "Насолоджуйтеся цим чистим, сучасним котеджем, розташованим у затишному, але зручному районі Центрально-Східного Остіна. Натхненний японськими чайними будинками, цей котедж на задньому дворі забезпечує легкий доступ до місць проведення SXSW, фестивалю ACL, центру міста, чудових ресторанів та громадського транспорту, а також пропонує спокійний відпочинок для відпочинку та зарядки.",
+      "Enjoy this clean, modern cottage located in a cozy yet convenient area of East Central Austin. Inspired by Japanese tea houses, this backyard cottage provides easy access to SXSW, ACL, downtown, great restaurants, and public transportation, while offering a peaceful retreat to relax and recharge.",
 
     property_details: {
       guests: 2,
@@ -59,7 +73,7 @@ function App() {
       baths: 1,
     },
 
-    neighborhood_info: "Район чарівний, веселий, безпечний і милий...",
+    neighborhood_info: "The area is charming, fun, safe and cute...",
 
     amenities: {
       hasPool: true,
@@ -92,7 +106,7 @@ function App() {
         "Public buses and taxis available within walking distance.",
       host_languages: ["English", "Spanish"],
       special_offers: "10% discount for bookings of 7 nights or more.",
-      "check-in_instructions":
+      checkin_instructions:
         "Check-in time is 3:00 PM. Please contact us in advance with your estimated arrival time.",
     },
 
@@ -144,7 +158,45 @@ function App() {
     ],
   };
 
-  return <div>Hello World</div>;
+  return (
+    <Page>
+      <Header />
+      <Title
+        title={data.listing_name}
+        rating={data.reviews_summary.average_rating}
+        review={data.reviews_summary.total_reviews}
+        city={data.location.city}
+        country={data.location.country}
+        superhost={data.superhost}
+      />
+      <Photo src={data.image} name={data.listing_name} />
+      <Price
+        price={data.price.original_price}
+        discount={data.price.discounted_price}
+        currency={data.price.currency}
+        cleaning={data.price.cleaning_fee}
+        service={data.price.service_fee}
+        checkin={data.availability.checkin_date}
+        checkout={data.availability.checkout_date}
+      />
+      <RoomList list={data.roomTypes} />
+      <Description title="Description" children={data.description} />
+      <PropertyDetails
+        guests={data.property_details.guests}
+        bedrooms={data.property_details.bedrooms}
+        beds={data.property_details.beds}
+        baths={data.property_details.baths}
+      />
+      <Description title="Neighborhood" children={data.neighborhood_info} />
+      <Amenities amenities={data.amenities} />
+      <Contact contact_info={data.contact_info} />
+      <AdditionalProperties
+        additional_properties={data.additional_properties}
+      />
+      <ReviewsList list={data.guestReviews} />
+      <AttractionNearby attractions_nearby={data.nearbyAttractions} />
+    </Page>
+  );
 }
 
 export default App;

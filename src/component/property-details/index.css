@@ -1,0 +1,6 @@
+.property-details__list {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+  line-height: 1.5em;
+}
